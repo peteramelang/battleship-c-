@@ -4,14 +4,16 @@ namespace Battleship
 {
     static class Constants
     {
+
+        public const string ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
         public const string EXIT = "exit";
         public const string HELP = "help";
         public const string PLACE = "place";
         public const string SHOOT = "shoot";
         public const string SHOW = "show";
 
-        public const string STATUS_ERROR = "sdfsdf";
-
+        public const string STATUS_ERROR = "error";        
 
         public const string PARA_BOARD = "board";
         public const string PARA_SHIPS = "ships";
@@ -30,12 +32,13 @@ namespace Battleship
         public const string HEADLINE_LIST = "List of all commands:";
 
         public const string LABEL_ERROR = "An error occurred:";
-        public const string LABEL_UNKNOWN_COMMAND = "Unknow command";
+        public const string LABEL_UNKNOWN_COMMAND = "Unknow command. Use help to see all commands.";
+
 
         public const string HEADLINE_List = "List of all commands:";
         public const string DESC_EXfIT = "sdfsdf";
 
-        public static Dictionary<string, string> commands = new Dictionary<string, string>()
+        public static Dictionary<string, string> COMMANDS = new Dictionary<string, string>()
         {
             { EXIT, DESC_EXIT },
             { HELP, DESC_HELP },

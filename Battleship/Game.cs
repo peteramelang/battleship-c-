@@ -38,14 +38,12 @@ namespace Battleship
         {
             data = data ?? new string[0];
 
-            Console.WriteLine(data);
-
             switch (type)
             {
                 case Constants.STATUS_ERROR:
-                    oManager.ThrowError(output);
+                    oManager.ThrowError(data);
                     break;
-                case "help":
+                case Constants.HELP:
                     oManager.ShowCommands(data);
                     break;
             }

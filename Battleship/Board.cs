@@ -10,7 +10,6 @@ namespace Battleship
     {
         int rowCount = 10;
         int columnCount = 10;
-        const string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
         public void Print()
         {
@@ -36,7 +35,7 @@ namespace Battleship
                         }
                     } else if(j == -1)
                     {
-                        Console.Write(" " + alphabet[i] + " |");
+                        Console.Write(" " + Constants.ALPHABET[i] + " |");
                     } else
                     {
                         Console.Write("   |");

@@ -23,7 +23,7 @@ namespace Battleship
         {
             if(string.IsNullOrEmpty(input))
             {
-                game.Print(Constants.STATUS_ERROR);
+                game.Print(Constants.STATUS_ERROR, new string[] { "Please enter a command." });
                 return;
             }
 
@@ -34,7 +34,7 @@ namespace Battleship
             switch (command)
             {
                 case Constants.HELP:
-                    game.Print("help", "", parameterList);
+                    game.Print("help", parameterList);
                     break;
                 case Constants.EXIT:
                     Environment.Exit(0);
@@ -45,7 +45,7 @@ namespace Battleship
                     break;
 
                 default:
-                    game.Print("error", "Unknown command. Use help to see all commands.");
+                    game.Print(Constants.STATUS_ERROR, new string[] { Constants.LABEL_UNKNOWN_COMMAND });
                     break;
             }
 

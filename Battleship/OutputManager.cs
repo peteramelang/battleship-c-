@@ -28,9 +28,14 @@ namespace Battleship
             Console.WriteLine();
         }
 
-        public void ThrowError(string error)
+        public void ThrowError(string[] errors)
         {
-            Console.WriteLine(Constants.LABEL_ERROR + " " + error);
+            Console.WriteLine(Constants.LABEL_ERROR);
+
+            foreach (string error in errors)
+            {
+                Console.WriteLine(error);
+            }
         }
 
         public void ShowCommands(string[] parameterList)
@@ -48,21 +53,21 @@ namespace Battleship
             {
                 Console.WriteLine(Constants.HEADLINE_LIST);
 
-                foreach (KeyValuePair<string, string> command in Constants.commands)
+                foreach (KeyValuePair<string, string> command in Constants.COMMANDS)
                 {
-                    Console.WriteLine(command.Key/* + " - " + command.Value*/);
+                    Console.WriteLine(command.Key);
                 }
             }
             else
             {
                 string commandDescription;
 
-                if (Constants.commands.TryGetValue(parameter, out commandDescription))
+                if (Constants.COMMANDS.TryGetValue(parameter, out commandDescription))
                 {
                     Console.WriteLine(commandDescription);
                 } else
                 {
-                    ThrowError(Constants.LABEL_UNKNOWN_COMMAND + " " + parameter);
+                    game.Print(Constants.STATUS_ERROR, new string[] { Constants.LABEL_UNKNOWN_COMMAND });
                 }
             }
         }
