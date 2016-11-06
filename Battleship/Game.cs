@@ -4,10 +4,10 @@ namespace Battleship
 {
     class Game
     {
-        static Human human = new Human();
-        static AI ai = new AI();
+        public Human human = new Human();
+        public AI ai = new AI();
 
-        Player[] players = { human, ai };
+        Player[] players = new Player[2];
 
         Board board;
         InputManager iManager;
@@ -17,6 +17,9 @@ namespace Battleship
 
         public Game()
         {
+            players[0] = human;
+            players[1] = human;
+
             board = new Board();
             iManager = new InputManager(this);
             oManager = new OutputManager(this);
@@ -24,19 +27,20 @@ namespace Battleship
 
         public void Start()
         {
-            oManager.PrintInstructions();
-
-            board.Print();
+            PrintInterface();
 
             do
-            {
+            {                
                 iManager.Listen();
             } while (playing);
         }
 
-        public void Print(string type, string[] data = null)
+        public void Print(string type = null, string[] data = null)
         {
+            type = type ?? "";
             data = data ?? new string[0];
+
+            PrintInterface();
 
             switch (type)
             {
@@ -44,9 +48,20 @@ namespace Battleship
                     oManager.ThrowError(data);
                     break;
                 case Constants.HELP:
-                    oManager.ShowCommands(data);
+                    oManager.PrintHelp(data);
                     break;
             }
+        }
+
+        void PrintInterface()
+        {
+            Console.Clear();
+
+            oManager.PrintOverview();
+            oManager.PrintBoard();
+            oManager.PrintHelp(new string[] { Constants.PARA_ALL });
+
+            Console.WriteLine();
         }
     }
 }

@@ -8,10 +8,12 @@ namespace Battleship
 {
     class Player
     {
-        List<Ship> ships = new List<Ship>();
+        Dictionary<string, Ship> ships = new Dictionary<string, Ship>();
 
         public bool alive = true;
 
-        public void requestShipPositioning() {}
+        public void PlaceShip(string shipType) {
+            ships.Add(shipType, new Ship(shipType));
+        }
     }
 }

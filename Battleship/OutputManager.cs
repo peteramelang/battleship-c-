@@ -16,15 +16,28 @@ namespace Battleship
             OutputManager.game = game;
         }
 
-        public void PrintInstructions()
+        public void PrintOverview(Dictionary<string, int> shipCount = null)
         {
-            Console.WriteLine("Place the following ships on the board:");
-            Console.WriteLine("1x {0}: [A][A][A][A][A]", Constants.AIRCRAFT_CARRIER);
-            Console.WriteLine("1x {0}:       [B][B][B][B]", Constants.BATTLESHIP);
-            Console.WriteLine("1x {0}:          [C][C][C]", Constants.CRUISER);
-            Console.WriteLine("2x {0}:        [D][D]", Constants.DESTROYER);
-            Console.WriteLine();
-            Console.WriteLine(Constants.DESC_PLACE_SHORT);
+            shipCount = shipCount ?? Constants.SHIP_COUNT;
+
+            foreach (KeyValuePair<string, int> ship in Constants.SHIP_LENGTHS)
+            {
+                Console.Write("{0}x", shipCount[ship.Key]);
+                Console.Write(" {0}: ", ship.Key);
+
+                // Add Space
+                for (int i = 0; i < Constants.AIRCRAFT_CARRIER.Length - ship.Key.Length; i++)
+                {
+                    Console.Write(" ");
+                }
+
+                for (int i = 0; i < Constants.SHIP_LENGTHS[ship.Key]; i++)
+                {
+                    Console.Write(Constants.BOARD_SYMBOLS[ship.Key]);
+                }
+
+                Console.WriteLine();
+            }
             Console.WriteLine();
         }
 
@@ -38,38 +51,59 @@ namespace Battleship
             }
         }
 
-        public void ShowCommands(string[] parameterList)
+        public void PrintHelp(string[] parameterList = null)
         {
-            string parameter = ""; ;
+            string parameter = GetParameter(parameterList);
 
-            if (parameterList != null && parameterList.Length != 0)
+            if (parameter.Length == 0 ||parameter == "")
             {
-                parameter = parameterList.First().ToLower();
+                Console.WriteLine(Constants.DESC_HELP);
             }
-
-            Console.Clear();
-
-            if (string.IsNullOrEmpty(parameter))
+            else if (parameter == Constants.PARA_ALL)
             {
-                Console.WriteLine(Constants.HEADLINE_LIST);
+                Console.Write("Commands: ");
 
-                foreach (KeyValuePair<string, string> command in Constants.COMMANDS)
+                foreach (string commandKey in Constants.COMMANDS.Keys)
                 {
-                    Console.WriteLine(command.Key);
+                    string formattedCommand = string.Format(
+                        "({0}){1}",
+                        commandKey.First(),
+                        commandKey.Substring(1)
+                        );
+
+                    Console.Write(formattedCommand);
+                    
+                    if(commandKey != Constants.COMMANDS.Keys.Last())
+                        Console.Write(", ");
                 }
             }
             else
             {
                 string commandDescription;
 
-                if (Constants.COMMANDS.TryGetValue(parameter, out commandDescription))
+                if (Constants.COMMANDS.TryGetValue(parameter,  out commandDescription))
                 {
                     Console.WriteLine(commandDescription);
                 } else
                 {
-                    game.Print(Constants.STATUS_ERROR, new string[] { Constants.LABEL_UNKNOWN_COMMAND });
+                    ThrowError(new string[] { Constants.LABEL_UNKNOWN_COMMAND });
                 }
             }
+        }
+
+        public void PrintBoard()
+        {
+            Board.Print();
+        }
+
+        static string GetParameter(string[] parameterList)
+        {
+            string parameter = "";
+
+            if (parameterList != null && parameterList.Length != 0)
+                parameter = parameterList.First().ToLower();
+
+            return parameter;
         }
     }
 }

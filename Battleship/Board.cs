@@ -8,42 +8,61 @@ namespace Battleship
 {
     class Board
     {
-        int rowCount = 10;
-        int columnCount = 10;
+        const int rowCount = 10;
+        const int columnCount = 10;
 
-        public void Print()
+        public static void Print()
         {
-            Object ding = new Object();
+            string[,] fieldData = new string[Board.rowCount, Board.columnCount] {
+                { Constants.EMPTY_FIELD, Constants.AIRCRAFT_CARRIER, "", "", "", "", "", "", "", "" } ,
+                { "", Constants.AIRCRAFT_CARRIER, "", "", "", "", "", "", "", "" } ,
+                { "", Constants.AIRCRAFT_CARRIER, "", "", "", "", "", "", "", "" } ,
+                { "", Constants.AIRCRAFT_CARRIER, "", "", "", "", "", "", "", "" } ,
+                { "", Constants.AIRCRAFT_CARRIER, "", "", "", "", "", "", "", "" } ,
+                { "", "", "", "", "", "", "", "", "", "" } ,
+                { "", "", "", "", "", "", "", "", "", "" } ,
+                { "", "", "", "", "", "", "", "", "", "" } ,
+                { "", "", "", "", "", "", "", "", "", "" } ,
+                { "", "", "", "", "", "", "", "", "", "" } 
+            };
 
-            PrintBoard(ding);
+            Board.PrintBoard(fieldData);
         }
 
-        void PrintBoard(Object data)
+        static void PrintBoard(string[,] data)
         {
-            for(int i = -1; i < rowCount; i++)
+            for(int row = -1; row < rowCount; row++)
             {
-                for(int j = -1; j < columnCount; j++)
+                for(int column = -1; column < columnCount; column++)
                 {
-                    if(i == -1)
+                    if(row == -1)
                     {
-                        if(j >= 0)
+                        if(column >= 0)
                         {
-                            Console.Write(" " + j + " |");
+                            Console.Write(" " + ++column);
+                            if (column != 10) Console.Write(" |");
+
+                            column--;
                         } else
                         {
                             Console.Write("   |");
                         }
-                    } else if(j == -1)
+                    } else if(column == -1)
                     {
-                        Console.Write(" " + Constants.ALPHABET[i] + " |");
+                        Console.Write(" " + Constants.ALPHABET[row] + " |");
                     } else
                     {
-                        Console.Write("   |");
+                        Console.Write(
+                            Constants.BOARD_SYMBOLS[
+                                data[row, column]
+                                ]
+                            );
+                        Console.Write("|");
                     }
                 }
                 Console.WriteLine();
 
-                for (int j = -1; j < columnCount; j++)
+                for (int column = -1; column < columnCount; column++)
                 {
                     Console.Write("---+");
                 }

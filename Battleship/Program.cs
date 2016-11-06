@@ -10,10 +10,9 @@ namespace Battleship
     {
         static void Main(string[] args)
         {
+            Console.WindowHeight = 40;
             Game game = new Game();
             game.Start();
-
-            Console.ReadKey();
         }
     }
 }
