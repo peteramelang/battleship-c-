@@ -22,6 +22,7 @@ namespace Battleship
         };
 
         public const string STATUS_ERROR = "error";        
+        public const string STATUS_REQUEST = "request";
 
         public const string PARA_BOARD = "board";
         public const string PARA_SHIPS = "ships";
@@ -37,6 +38,7 @@ namespace Battleship
 
         public const string LABEL_ERROR = "An error occurred:";
         public const string LABEL_UNKNOWN_COMMAND = "Unknow command. Use help to see all commands.";
+        public const string LABEL_INVALID_PARAMETER = "Invalid Parameter. Use help <command> to see all.";
 
         public const string AIRCRAFT_CARRIER = "Aircraft Carrier";
         public const string BATTLESHIP = "Battleship";

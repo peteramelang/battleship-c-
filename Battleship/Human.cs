@@ -9,9 +9,7 @@ namespace Battleship
     class Human : Player
     {
 
-        public new void requestShipPositioning()
-        {
-            Console.WriteLine("Enter the position f");
-        }
+        public Human(OutputManager oManager) : base(oManager) { }
+
     }
 }

@@ -19,6 +19,13 @@ namespace Battleship
             HandleInput(Console.ReadLine());
         }
 
+        public string Request(string type)
+        {
+            game.Print(Constants.STATUS_REQUEST, new string[] { type });
+
+            return "";
+        }
+
         void HandleInput(string input)
         {
             input = input ?? "";
@@ -47,7 +54,15 @@ namespace Battleship
                     Environment.Exit(0);
                     break;
                 case Constants.PLACE:
-                    Console.WriteLine(game.human.alive);
+                    game.human.PlaceShip(parameterList);
+                    break;
+                case "bb":
+                    Dictionary<string, Ship> dong = game.human.GetShips();
+                    Console.WriteLine("dong");
+                    foreach (string key in dong.Keys)
+                    {
+                        Console.WriteLine("fd " + key);
+                    }
                     break;
                 default:
                     game.Print(Constants.STATUS_ERROR, new string[] { Constants.LABEL_UNKNOWN_COMMAND });

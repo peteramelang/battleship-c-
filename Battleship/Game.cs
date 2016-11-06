@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Linq;
 
 namespace Battleship
 {
     class Game
     {
-        public Human human = new Human();
-        public AI ai = new AI();
+        public Human human;
+        public AI ai;
 
         Player[] players = new Player[2];
 
@@ -17,12 +18,17 @@ namespace Battleship
 
         public Game()
         {
-            players[0] = human;
-            players[1] = human;
+            
 
             board = new Board();
             iManager = new InputManager(this);
             oManager = new OutputManager(this);
+
+            human = new Human(oManager);
+            ai = new AI(oManager);
+
+            players[0] = human;
+            players[1] = ai;
         }
 
         public void Start()
@@ -50,6 +56,9 @@ namespace Battleship
                 case Constants.HELP:
                     oManager.PrintHelp(data);
                     break;
+                case Constants.REQUEST:
+                    oManager.Request(data);
+                    break;
             }
         }
 
@@ -62,6 +71,21 @@ namespace Battleship
             oManager.PrintHelp(new string[] { Constants.PARA_ALL });
 
             Console.WriteLine();
+        }
+
+        public static string GetParameter(string[] parameterList)
+        {
+            string parameter = "";
+
+            if (parameterList != null && parameterList.Length != 0)
+                parameter = parameterList.First().ToLower();
+
+            return parameter;
+        }
+
+        public static string MakeUppercase(string word)
+        {
+            return word.First().ToString().ToUpper() + word.Substring(1);
         }
     }
 }

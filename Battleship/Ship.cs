@@ -12,11 +12,15 @@ namespace Battleship
         Dictionary<string, int> coordinates = new Dictionary<string, int>();
         string status;
         string type;
+        Player owner;
         
-        public Ship(string shipType)
+        public Ship(string shipType, Player owner)
         {
-            this.type = shipType;
-            this.length = length;
+            type = shipType;
+            length = Constants.SHIP_LENGTHS[shipType];
+            this.owner = owner;
+            
+            owner.game.
         }
 
         public Dictionary<string, int> Place(int[,] coordinates)

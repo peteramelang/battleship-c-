@@ -8,5 +8,7 @@ namespace Battleship
 {
     class AI : Player
     {
+
+        public AI(OutputManager oManager) : base(oManager) { }
     }
 }

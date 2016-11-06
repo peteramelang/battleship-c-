@@ -23,7 +23,10 @@ namespace Battleship
             foreach (KeyValuePair<string, int> ship in Constants.SHIP_LENGTHS)
             {
                 Console.Write("{0}x", shipCount[ship.Key]);
-                Console.Write(" {0}: ", ship.Key);
+                Console.Write(" ({0}){1}: ", 
+                    ship.Key.First(),
+                    ship.Key.Substring(1)
+                    );
 
                 // Add Space
                 for (int i = 0; i < Constants.AIRCRAFT_CARRIER.Length - ship.Key.Length; i++)
@@ -53,7 +56,7 @@ namespace Battleship
 
         public void PrintHelp(string[] parameterList = null)
         {
-            string parameter = GetParameter(parameterList);
+            string parameter = Game.GetParameter(parameterList);
 
             if (parameter.Length == 0 ||parameter == "")
             {
@@ -65,13 +68,11 @@ namespace Battleship
 
                 foreach (string commandKey in Constants.COMMANDS.Keys)
                 {
-                    string formattedCommand = string.Format(
+                    Console.Write(
                         "({0}){1}",
                         commandKey.First(),
                         commandKey.Substring(1)
                         );
-
-                    Console.Write(formattedCommand);
                     
                     if(commandKey != Constants.COMMANDS.Keys.Last())
                         Console.Write(", ");
@@ -94,16 +95,6 @@ namespace Battleship
         public void PrintBoard()
         {
             Board.Print();
-        }
-
-        static string GetParameter(string[] parameterList)
-        {
-            string parameter = "";
-
-            if (parameterList != null && parameterList.Length != 0)
-                parameter = parameterList.First().ToLower();
-
-            return parameter;
         }
     }
 }
