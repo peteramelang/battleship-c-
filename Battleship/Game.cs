@@ -10,7 +10,7 @@ namespace Battleship
 
         Player[] players = new Player[2];
 
-        Board board;
+        public Board board;
         InputManager iManager;
         OutputManager oManager;
 
@@ -18,8 +18,6 @@ namespace Battleship
 
         public Game()
         {
-            
-
             board = new Board();
             iManager = new InputManager(this);
             oManager = new OutputManager(this);
@@ -33,7 +31,7 @@ namespace Battleship
 
         public void Start()
         {
-            PrintInterface();
+            PrintMainInterface();
 
             do
             {                
@@ -46,23 +44,13 @@ namespace Battleship
             type = type ?? "";
             data = data ?? new string[0];
 
-            PrintInterface();
-
-            switch (type)
-            {
-                case Constants.STATUS_ERROR:
-                    oManager.ThrowError(data);
-                    break;
-                case Constants.HELP:
-                    oManager.PrintHelp(data);
-                    break;
-                case Constants.REQUEST:
-                    oManager.Request(data);
-                    break;
-            }
+            PrintMainInterface();
+            
+            if(type.Length > 0 && type != null)
+                PrintAdditionalInformation(type, data);
         }
 
-        void PrintInterface()
+        void PrintMainInterface()
         {
             Console.Clear();
 
@@ -73,7 +61,23 @@ namespace Battleship
             Console.WriteLine();
         }
 
-        public static string GetParameter(string[] parameterList)
+        void PrintAdditionalInformation(string type, string[] data)
+        {
+            switch (type)
+            {
+                case Constants.STATUS_ERROR:
+                    oManager.ThrowError(data);
+                    break;
+                case Constants.HELP:
+                    oManager.PrintHelp(data);
+                    break;
+                case Constants.STATUS_REQUEST:
+                    oManager.PrintRequest(data);
+                    break;
+            }
+        }
+
+        public static string GetFirstParameter(string[] parameterList)
         {
             string parameter = "";
 

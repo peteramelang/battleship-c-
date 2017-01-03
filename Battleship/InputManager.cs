@@ -19,9 +19,12 @@ namespace Battleship
             HandleInput(Console.ReadLine());
         }
 
-        public string Request(string type)
+        public string Request(string[] types)
         {
-            game.Print(Constants.STATUS_REQUEST, new string[] { type });
+            foreach (string type in types)
+            {
+                game.Print(Constants.STATUS_REQUEST, new string[] { type });
+            }
 
             return "";
         }
@@ -56,12 +59,12 @@ namespace Battleship
                 case Constants.PLACE:
                     game.human.PlaceShip(parameterList);
                     break;
-                case "bb":
-                    Dictionary<string, Ship> dong = game.human.GetShips();
+                case "d":
+                    List<Ship> ships = game.human.GetShips();
                     Console.WriteLine("dong");
-                    foreach (string key in dong.Keys)
+                    foreach (Ship ship in ships)
                     {
-                        Console.WriteLine("fd " + key);
+                        Console.WriteLine("fd " + ship.owner.alive);
                     }
                     break;
                 default:

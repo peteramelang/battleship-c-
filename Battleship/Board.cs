@@ -11,21 +11,21 @@ namespace Battleship
         const int rowCount = 10;
         const int columnCount = 10;
 
-        public static void Print()
-        {
-            string[,] fieldData = new string[Board.rowCount, Board.columnCount] {
-                { Constants.EMPTY_FIELD, Constants.AIRCRAFT_CARRIER, "", "", "", "", "", "", "", "" } ,
-                { "", Constants.AIRCRAFT_CARRIER, "", "", "", "", "", "", "", "" } ,
-                { "", Constants.AIRCRAFT_CARRIER, "", "", "", "", "", "", "", "" } ,
-                { "", Constants.AIRCRAFT_CARRIER, "", "", "", "", "", "", "", "" } ,
-                { "", Constants.AIRCRAFT_CARRIER, "", "", "", "", "", "", "", "" } ,
-                { "", "", "", "", "", "", "", "", "", "" } ,
-                { "", "", "", "", "", "", "", "", "", "" } ,
-                { "", "", "", "", "", "", "", "", "", "" } ,
-                { "", "", "", "", "", "", "", "", "", "" } ,
-                { "", "", "", "", "", "", "", "", "", "" } 
-            };
+        private string[,] fieldData = new string[Board.rowCount, Board.columnCount];
 
+        public Board()
+        {
+            for (int i = 0; i < rowCount; i++)
+            {
+                for (int j = 0; j < columnCount; j++)
+                {
+                    fieldData[i, j] = Constants.EMPTY_FIELD;
+                }
+            }
+        }
+
+        public void Print()
+        {
             Board.PrintBoard(fieldData);
         }
 
@@ -37,9 +37,15 @@ namespace Battleship
                 {
                     if(row == -1)
                     {
-                        if(column >= 0)
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                        if (column >= 0)
                         {
+                            Console.ForegroundColor = ConsoleColor.White;
+
                             Console.Write(" " + ++column);
+
+                            Console.ForegroundColor = ConsoleColor.Gray;
+
                             if (column != 10) Console.Write(" |");
 
                             column--;
@@ -49,14 +55,25 @@ namespace Battleship
                         }
                     } else if(column == -1)
                     {
-                        Console.Write(" " + Constants.ALPHABET[row] + " |");
-                    } else
+                        Console.ForegroundColor = ConsoleColor.White;
+
+                        Console.Write(" " + Constants.ALPHABET[row]);
+
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                        Console.Write(" |");
+                    }
+                    else
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
+
                         Console.Write(
                             Constants.BOARD_SYMBOLS[
                                 data[row, column]
                                 ]
                             );
+
+                        Console.ForegroundColor = ConsoleColor.Gray;
+
                         Console.Write("|");
                     }
                 }
@@ -64,6 +81,8 @@ namespace Battleship
 
                 for (int column = -1; column < columnCount; column++)
                 {
+                    Console.ForegroundColor = ConsoleColor.Gray;
+
                     Console.Write("---+");
                 }
 

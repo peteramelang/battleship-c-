@@ -8,19 +8,32 @@ namespace Battleship
 {
     class Player
     {
-        Dictionary<string, Ship> ships = new Dictionary<string, Ship>();
+        List<Ship> ships = new List<Ship>();
 
         OutputManager oManager;
 
         public bool alive = true;
 
-        public Player(OutputManager oManager)
+        public Player(ref OutputManager oManager)
         {
             this.oManager = oManager;
+
+            GenerateShips();
+        }
+
+        void GenerateShips()
+        {
+            foreach (KeyValuePair<String, int> ship in Constants.SHIP_COUNT)
+            {
+                for (int i = 0; i < ship.Value; i++)
+                {
+                    ships.Add(new Ship(ship.Key, this));
+                }
+            }
         }
 
         public void PlaceShip(string[] shipType) {
-            string parameter = Game.MakeUppercase(Game.GetParameter(shipType));
+            string parameter = Game.MakeUppercase(Game.GetFirstParameter(shipType));
 
             if (parameter.Length == 0 || parameter == "")
             {
@@ -33,10 +46,16 @@ namespace Battleship
                 return;
             }
 
-            ships.Add(parameter, new Ship(parameter));
+            foreach (Ship ship in ships)
+            {
+                if (ship.type == parameter)
+                {
+
+                }
+            }
         }
 
-        public Dictionary<string, Ship> GetShips()
+        public List<Ship> GetShips()
         {
             return ships;
         }

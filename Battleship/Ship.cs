@@ -10,17 +10,18 @@ namespace Battleship
     {
         int length;
         Dictionary<string, int> coordinates = new Dictionary<string, int>();
-        string status;
-        string type;
-        Player owner;
-        
+        Constants.SHIP_STATUS status;
+        public string type;
+        public Player owner;
+
         public Ship(string shipType, Player owner)
         {
             type = shipType;
             length = Constants.SHIP_LENGTHS[shipType];
             this.owner = owner;
+            status = Constants.SHIP_STATUS.NEW;
             
-            owner.game.
+            //owner.game.
         }
 
         public Dictionary<string, int> Place(int[,] coordinates)

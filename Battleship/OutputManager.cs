@@ -9,11 +9,11 @@ namespace Battleship
     class OutputManager
     {
 
-        private static Game game;
+        Game game;
 
         public OutputManager(Game game)
         {
-            OutputManager.game = game;
+            this.game = game;
         }
 
         public void PrintOverview(Dictionary<string, int> shipCount = null)
@@ -23,10 +23,9 @@ namespace Battleship
             foreach (KeyValuePair<string, int> ship in Constants.SHIP_LENGTHS)
             {
                 Console.Write("{0}x", shipCount[ship.Key]);
-                Console.Write(" ({0}){1}: ", 
-                    ship.Key.First(),
-                    ship.Key.Substring(1)
-                    );
+                Console.Write(" ({0})", ship.Key.First());
+
+                Console.Write("{0}: ", ship.Key.Substring(1));
 
                 // Add Space
                 for (int i = 0; i < Constants.AIRCRAFT_CARRIER.Length - ship.Key.Length; i++)
@@ -56,7 +55,7 @@ namespace Battleship
 
         public void PrintHelp(string[] parameterList = null)
         {
-            string parameter = Game.GetParameter(parameterList);
+            string parameter = Game.GetFirstParameter(parameterList);
 
             if (parameter.Length == 0 ||parameter == "")
             {
@@ -92,9 +91,14 @@ namespace Battleship
             }
         }
 
+        public void PrintRequest(string[] data)
+        {
+            Console.WriteLine();
+        }
+
         public void PrintBoard()
         {
-            Board.Print();
+            game.board.Print();
         }
     }
 }

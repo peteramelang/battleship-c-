@@ -71,5 +71,11 @@ namespace Battleship
             { EMPTY_FIELD, "   " },
         };
 
+        public enum SHIP_STATUS {
+            NEW,
+            HIT,
+            DESTROYED
+        };
+
     }
 }
