@@ -8,7 +8,7 @@ namespace Battleship
 {
     class Player
     {
-        List<Ship> ships = new List<Ship>();
+        protected List<Ship> ships = new List<Ship>();
 
         OutputManager oManager;
 
@@ -32,15 +32,18 @@ namespace Battleship
             }
         }
 
-        public void PlaceShip(string[] shipType) {
-            string parameter = Game.MakeUppercase(Game.GetFirstParameter(shipType));
+        protected void PlaceShip(string[] parameter) {
+            string[] parameterList = Game.MakeUppercase(parameter);
 
-            if (parameter.Length == 0 || parameter == "")
+            if (parameterList.Length == 0)
             {
                 oManager.PrintHelp(new string[] { "place" });
                 return;
             }
-            else if (!Constants.SHIP_LENGTHS.ContainsKey(parameter))
+
+            string shipType = Game.GetFirstParameter(parameterList);
+
+            if (!Constants.SHIP_LENGTHS.ContainsKey(shipType))
             {
                 oManager.ThrowError(new string[] { Constants.LABEL_INVALID_PARAMETER });
                 return;
@@ -48,9 +51,9 @@ namespace Battleship
 
             foreach (Ship ship in ships)
             {
-                if (ship.type == parameter)
+                if (ship.type == shipType)
                 {
-
+                    Console.WriteLine("blimb");
                 }
             }
         }

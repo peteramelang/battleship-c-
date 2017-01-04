@@ -11,5 +11,12 @@ namespace Battleship
 
         public AI(OutputManager oManager) : base(ref oManager) { }
 
+        public void PlaceShips()
+        {
+            foreach (Ship ship in ships)
+            {
+                PlaceShip(new String[] { ship.type });
+            }
+        }
     }
 }

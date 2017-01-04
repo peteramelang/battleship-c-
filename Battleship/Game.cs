@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Battleship
@@ -27,6 +28,8 @@ namespace Battleship
 
             players[0] = human;
             players[1] = ai;
+
+            ai.PlaceShips();
         }
 
         public void Start()
@@ -82,7 +85,7 @@ namespace Battleship
             string parameter = "";
 
             if (parameterList != null && parameterList.Length != 0)
-                parameter = parameterList.First().ToLower();
+                parameter = parameterList[0];
 
             return parameter;
         }
@@ -90,6 +93,18 @@ namespace Battleship
         public static string MakeUppercase(string word)
         {
             return word.First().ToString().ToUpper() + word.Substring(1);
+        }
+
+        public static string[] MakeUppercase(string[] words)
+        {
+            List<string> uppercase = new List<string>();
+
+            foreach (string word in words)
+            {
+                uppercase.Add(MakeUppercase(word));
+            }
+
+            return uppercase.ToArray();
         }
     }
 }
