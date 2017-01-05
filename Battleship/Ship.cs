@@ -9,7 +9,7 @@ namespace Battleship
     class Ship
     {
         int length;
-        Dictionary<string, int> coordinates = new Dictionary<string, int>();
+        int[][] coordinates = new int[][] { };
         Constants.SHIP_STATUS status;
         public string type;
         public Player owner;
@@ -20,21 +20,47 @@ namespace Battleship
             length = Constants.SHIP_LENGTHS[shipType];
             this.owner = owner;
             status = Constants.SHIP_STATUS.NEW;
-            
-            //owner.game.
         }
 
-        public Dictionary<string, int> Place(int[,] coordinates)
+        public bool Place(int[][] shipToPlaceCoordinates, List<int[][]> placedShipsCoordinates)
         {
-            this.coordinates.Add("x", coordinates[0,0]);
-            this.coordinates.Add("y", coordinates[0,1]);
+            foreach (int[][] placedShipCoordinate in placedShipsCoordinates)
+            {
+                for (int i = 0; i < shipToPlaceCoordinates.Length; i++)
+                {
 
-            return this.coordinates;
+                }
+            }
+
+
+            this.coordinates = coordinates;
+
+            return true;
+        }
+
+        public int[][] GetCoordinates()
+        {
+            return coordinates;
+        }
+
+        public int GetLength()
+        {
+            return length;
+        }
+
+        public int[,] GetDamagedParts()
+        {
+            return new int[,] { };
         }
 
         public bool IsSet()
         {
-            return coordinates.Count > 0 && coordinates != null;
+            return coordinates.Length > 0 && coordinates != null;
+        }
+
+        public override string ToString()
+        {
+            return type;
         }
 
     }

@@ -45,7 +45,7 @@ namespace Battleship
 
             if (!Constants.SHIP_LENGTHS.ContainsKey(shipType))
             {
-                oManager.ThrowError(new string[] { Constants.LABEL_INVALID_PARAMETER });
+                oManager.ThrowError(Constants.LABEL_INVALID_PARAMETER);
                 return;
             }
 
@@ -61,6 +61,21 @@ namespace Battleship
         public List<Ship> GetShips()
         {
             return ships;
+        }
+
+        public List<int[][]> GetPlacedShipCoordinates()
+        {
+            List<int[][]> placedShipCoordinates = new List<int[][]>();
+
+            foreach (Ship ship in ships)
+            {
+                if (ship.IsSet())
+                {
+                    placedShipCoordinates.Add(ship.GetCoordinates());
+                }
+            }
+
+            return placedShipCoordinates;
         }
     }
 }

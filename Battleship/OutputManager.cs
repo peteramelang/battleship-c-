@@ -53,6 +53,12 @@ namespace Battleship
             }
         }
 
+        public void ThrowError(string error)
+        {
+            Console.WriteLine(Constants.LABEL_ERROR);
+            Console.WriteLine(error);
+        }
+
         public void PrintHelp(string[] parameterList = null)
         {
             string parameter = Game.GetFirstParameter(parameterList);
@@ -86,7 +92,7 @@ namespace Battleship
                     Console.WriteLine(commandDescription);
                 } else
                 {
-                    ThrowError(new string[] { Constants.LABEL_UNKNOWN_COMMAND });
+                    ThrowError(Constants.LABEL_UNKNOWN_COMMAND);
                 }
             }
         }
@@ -99,6 +105,30 @@ namespace Battleship
         public void PrintBoard()
         {
             game.board.Print();
+        }
+
+        public void PrintShips(Player player)
+        {
+            List<Ship> ships = player.GetShips();
+
+            Dictionary<int[], string> test = new Dictionary<int[], string>();
+
+            int[] coordinates;
+            string icon;
+            int x, y;
+
+            foreach (Ship ship in ships)
+            {
+                if (!ship.IsSet())
+                    continue;
+
+                /*coordinates = ship.GetCoordinates();
+                x = coordinates[0];
+                y = coordinates[1];*/
+                //icon = ship.
+
+
+            }
         }
     }
 }

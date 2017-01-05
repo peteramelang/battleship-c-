@@ -90,6 +90,11 @@ namespace Battleship
             return parameter;
         }
 
+        public static string GetFirstParameter(string parameter)
+        {
+            return parameter;
+        }
+
         public static string MakeUppercase(string word)
         {
             return word.First().ToString().ToUpper() + word.Substring(1);
