@@ -63,15 +63,15 @@ namespace Battleship
             return ships;
         }
 
-        public List<int[][]> GetPlacedShipCoordinates()
+        public Dictionary<string, int[][]> GetPlacedShipCoordinates()
         {
-            List<int[][]> placedShipCoordinates = new List<int[][]>();
+            Dictionary<string, int[][]> placedShipCoordinates = new Dictionary<string, int[][]>();
 
             foreach (Ship ship in ships)
             {
                 if (ship.IsSet())
                 {
-                    placedShipCoordinates.Add(ship.GetCoordinates());
+                    placedShipCoordinates.Add(ship.type, ship.GetCoordinates());
                 }
             }
 

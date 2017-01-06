@@ -30,6 +30,7 @@ namespace Battleship
             players[1] = ai;
 
             ai.PlaceShips();
+
         }
 
         public void Start()

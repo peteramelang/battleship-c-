@@ -5,6 +5,9 @@ namespace Battleship
     static class Constants
     {
 
+        public const int ROWCOUNT = 10;
+        public const int COLUMNCOUNT = 10;
+
         public const string ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
         public const string EXIT = "exit";

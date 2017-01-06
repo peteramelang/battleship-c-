@@ -22,20 +22,9 @@ namespace Battleship
             status = Constants.SHIP_STATUS.NEW;
         }
 
-        public bool Place(int[][] shipToPlaceCoordinates, List<int[][]> placedShipsCoordinates)
+        public void SetCoordinates(int[][] shipToPlaceCoordinates)
         {
-            foreach (int[][] placedShipCoordinate in placedShipsCoordinates)
-            {
-                for (int i = 0; i < shipToPlaceCoordinates.Length; i++)
-                {
-
-                }
-            }
-
-
-            this.coordinates = coordinates;
-
-            return true;
+            coordinates = shipToPlaceCoordinates;
         }
 
         public int[][] GetCoordinates()

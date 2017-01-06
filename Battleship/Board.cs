@@ -8,32 +8,43 @@ namespace Battleship
 {
     class Board
     {
-        const int rowCount = 10;
-        const int columnCount = 10;
-
-        private string[,] fieldData = new string[Board.rowCount, Board.columnCount];
+        private string[,] fieldData = new string[Constants.ROWCOUNT, Constants.COLUMNCOUNT];
 
         public Board()
         {
-            for (int i = 0; i < rowCount; i++)
+            for (int i = 0; i < Constants.ROWCOUNT; i++)
             {
-                for (int j = 0; j < columnCount; j++)
+                for (int j = 0; j < Constants.COLUMNCOUNT; j++)
                 {
                     fieldData[i, j] = Constants.EMPTY_FIELD;
                 }
             }
         }
 
+        void UpdateData(Player player)
+        {
+            Dictionary<string, int[][]> ships = player.GetPlacedShipCoordinates();
+            
+
+            foreach (KeyValuePair<int[], string> coordinate in coordinateData)
+            {
+                int x = coordinate.Key[0];
+                int y = coordinate.Key[1];
+
+                fieldData[x, y] = coordinate.Value;
+            }
+        }
+
         public void Print()
         {
-            Board.PrintBoard(fieldData);
+            PrintBoard(fieldData);
         }
 
         static void PrintBoard(string[,] data)
         {
-            for(int row = -1; row < rowCount; row++)
+            for(int row = -1; row < Constants.ROWCOUNT; row++)
             {
-                for(int column = -1; column < columnCount; column++)
+                for(int column = -1; column < Constants.COLUMNCOUNT; column++)
                 {
                     if(row == -1)
                     {
@@ -79,7 +90,7 @@ namespace Battleship
                 }
                 Console.WriteLine();
 
-                for (int column = -1; column < columnCount; column++)
+                for (int column = -1; column < Constants.COLUMNCOUNT; column++)
                 {
                     Console.ForegroundColor = ConsoleColor.Gray;
 
