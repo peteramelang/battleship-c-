@@ -9,7 +9,7 @@ namespace Battleship
     class AI : Player
     {
 
-        public AI(OutputManager oManager) : base(ref oManager) { }
+        public AI(OutputManager oManager, Game game) : base(ref oManager, game) { }
 
         public void PlaceShips()
         {
@@ -30,6 +30,9 @@ namespace Battleship
 
                 ship.SetCoordinates(coordinates);
             }
+
+            game.board.UpdateData(this);
+            game.Print();
         }
 
         int[][] GetNewCoordinates(int shipLength)
@@ -65,36 +68,7 @@ namespace Battleship
             return coordinates;
         }
 
-        bool IsShipPlaceable(int[][] coordinates)
-        {
-            int coordinatesLength = coordinates.Length;
 
-            for (int i = 0; i < coordinatesLength; i++)
-            {
-                bool coordinateInBound = CoordinatesInBounds(coordinates[i]);
 
-                if (!coordinateInBound)
-                    return false;
-            }
-
-            return true;
-        }
-
-        bool CoordinatesInBounds(int[] coordinate)
-        {
-            int[][] boardBoundings = new int[][]
-            {
-                new int[] { 0, Constants.COLUMNCOUNT - 1 },
-                new int[] { 0, Constants.ROWCOUNT - 1 }
-            };
-
-            if ((coordinate[0] >= boardBoundings[0][0] && coordinate[0] <= boardBoundings[0][1]) &&
-            (coordinate[1] >= boardBoundings[1][0] && coordinate[1] <= boardBoundings[1][1]))
-            {
-                return true;
-            }
-
-            return false;
-        }
     }
 }

@@ -19,12 +19,12 @@ namespace Battleship
 
         public Game()
         {
-            board = new Board();
+            board = new Board(this);
             iManager = new InputManager(this);
             oManager = new OutputManager(this);
 
-            human = new Human(oManager);
-            ai = new AI(oManager);
+            human = new Human(oManager, this);
+            ai = new AI(oManager, this);
 
             players[0] = human;
             players[1] = ai;

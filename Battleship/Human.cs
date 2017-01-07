@@ -9,7 +9,7 @@ namespace Battleship
     class Human : Player
     {
 
-        public Human(OutputManager oManager) : base(ref oManager) { }
+        public Human(OutputManager oManager, Game game) : base(ref oManager, game) { }
 
         public void PlaceShip(string[] parameter)
         {

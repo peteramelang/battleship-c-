@@ -10,8 +10,12 @@ namespace Battleship
     {
         private string[,] fieldData = new string[Constants.ROWCOUNT, Constants.COLUMNCOUNT];
 
-        public Board()
+        Game game;
+
+        public Board(Game game)
         {
+            this.game = game;
+
             for (int i = 0; i < Constants.ROWCOUNT; i++)
             {
                 for (int j = 0; j < Constants.COLUMNCOUNT; j++)
@@ -21,17 +25,19 @@ namespace Battleship
             }
         }
 
-        void UpdateData(Player player)
+        public void UpdateData(Player player)
         {
-            Dictionary<string, int[][]> ships = player.GetPlacedShipCoordinates();
-            
+            Dictionary<string, List<int[]>> shipsCoordinates = player.GetPlacedShipCoordinates();
 
-            foreach (KeyValuePair<int[], string> coordinate in coordinateData)
+            foreach (KeyValuePair<string, List<int[]>> shipCoordinates in shipsCoordinates)
             {
-                int x = coordinate.Key[0];
-                int y = coordinate.Key[1];
+                foreach (int[] shipCoordinate in shipCoordinates.Value)
+                {
+                    int x = shipCoordinate[0];
+                    int y = shipCoordinate[1];
 
-                fieldData[x, y] = coordinate.Value;
+                    fieldData[x, y] = shipCoordinates.Key;
+                }
             }
         }
 
